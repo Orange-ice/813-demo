@@ -1,13 +1,11 @@
 <template>
-  <div>
-    <button @click="login">
-      login
-    </button>
+  <div class="login">
+    <Button type="primary" @click="login">登录</Button>
   </div>
 </template>
 
 <script lang="ts" setup>
-
+import { Button } from '@arco-design/web-vue';
 
 import useHttp from '../service/http.ts';
 import { API } from '../service/API.ts';
@@ -25,3 +23,9 @@ const login = async () => {
 
 </script>
 
+<style scoped>
+.login {
+  margin-top: 100px;
+  text-align: center;
+}
+</style>

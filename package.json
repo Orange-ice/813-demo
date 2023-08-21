@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@arco-design/web-vue": "2.50.1",
     "@vueuse/core": "10.3.0",
     "pinia": "2.1.6",
     "the-new-css-reset": "1.9.0",
@@ -16,6 +17,7 @@
     "vue-router": "4.2.4"
   },
   "devDependencies": {
+    "@arco-plugins/vite-vue": "1.4.5",
     "@vitejs/plugin-vue": "4.2.3",
     "typescript": "5.1.6",
     "vite": "4.4.9",
