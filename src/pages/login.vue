@@ -1,15 +1,15 @@
 <template>
   <div class="login">
-    <Button type="primary" @click="login">登录</Button>
+    <AButton type="primary" @click="login">登录</AButton>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { Button } from '@arco-design/web-vue';
-
 import useHttp from '../service/http.ts';
 import { API } from '../service/API.ts';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const { execute, data } = useHttp(API.login, { immediate: false }).post({
   username: 'yiyi',
   password: '123456',
@@ -19,6 +19,9 @@ const { execute, data } = useHttp(API.login, { immediate: false }).post({
 const login = async () => {
   await execute();
   console.log(data.value);
+  router.push({
+    name: 'CarbonData'
+  });
 };
 
 </script>
