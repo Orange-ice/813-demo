@@ -13,7 +13,7 @@ import useHttp from '../service/http.ts';
 import { API } from '../service/API.ts';
 
 const { execute, data } = useHttp(API.login, { immediate: false }).post({
-  username: 'nene',
+  username: 'yiyi',
   password: '123456',
   sysTemType: 'CARBON_DATA',
 }).json();
