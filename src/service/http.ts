@@ -1,13 +1,16 @@
 import { createFetch } from '@vueuse/core';
+import { getToken } from '../utils/auth.ts';
 
 const useHttp = createFetch({
-  // baseUrl: '/',
+  baseUrl: '/demo',
   options: {
     async beforeFetch({ options }) {
-
-      // options.headers = {
-      //   Authorization: 'token'
-      // };
+      const token = getToken();
+      if (token) {
+        options.headers = {
+          Authorization: token,
+        };
+      }
       return { options };
     },
     async afterFetch({ response }) {

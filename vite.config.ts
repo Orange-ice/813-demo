@@ -13,9 +13,10 @@ export default defineConfig({
   server: {
     port: 8888,
     proxy: {
-      '/ecdigit/api': {
+      '/demo': {
         target: ' http://122.144.182.11:6609',
         changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/demo/, '')
       }
     }
   }

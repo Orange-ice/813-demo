@@ -4,6 +4,13 @@ import { API } from '../service/API.ts';
 import { setToken } from '../utils/auth.ts';
 import { ref } from 'vue';
 
+// import type { UserDetail } from './user';
+
+interface UserState extends UserDetail {
+
+}
+
+
 export const useUserStore = defineStore('user', () => {
 
   const { execute: executeLogin, data: loginData } = useHttp(API.login, { immediate: false }).post({
@@ -11,8 +18,19 @@ export const useUserStore = defineStore('user', () => {
     password: '123456',
     sysTemType: 'CARBON_DATA',
   }).json<ResponseData<{ accesstoken: string }>>();
+  const {
+    execute: executeUserDetail,
+    data: userDetailData
+  } = useHttp(`${API.userDetail}?projectType=ghg`, { immediate: false }).get().json<ResponseData<UserDetail>>();
 
-  const state = ref({});
+  const user = ref<UserState>({
+    id: '',
+    company: { id: '', name: '' },
+    industry: { id: '', name: '' },
+    about: '',
+    username: '',
+    name: '',
+  });
 
   async function login() {
     await executeLogin();
@@ -22,8 +40,12 @@ export const useUserStore = defineStore('user', () => {
   }
 
   async function getUserInfo() {
+    await executeUserDetail();
+    if (userDetailData.value?.data) {
+      user.value = { ...user.value, ...userDetailData.value.data };
+    }
   }
 
 
-  return { state, login, getUserInfo };
+  return { user, login, getUserInfo };
 });
